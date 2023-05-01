@@ -17,18 +17,23 @@
         <el-row class="search-result-row" :gutter="30">
           <el-col class="search-result-col" :span="8" v-for="(owner, index) in resultList" :key="index">
             <el-card @click.native="toRoom(owner.platform, owner.roomId)" class="search-result-card" shadow="hover">
-              <div class="search-result-card-head">
-                <img class="search-head-pic" :src=owner.headPic />
+              <div class="search-result-card-left">
+                <div class="search-result-card-avatar">
+                  <img class="search-head-pic" :src=owner.headPic />
+                </div>
               </div>
               <div class="search-result-card-right">
+                <div class="result-room-name">
+                  {{ owner.roomName }}
+                </div>
                 <div class="result-name">
                   {{ getPlatform(owner.platform) }} · {{ owner.nickName }}
                 </div>
                 <div>
                   <div :class="isLive(owner.isLive) ? 'info-isLive' : 'info-notLive'">{{ isLive(owner.isLive) ? "直播中" : "未开播" }}</div>
-                </div>
-                <div class="result-follows">
-                  关注人数:{{ handleOnline(owner.followers) }}
+                  <div class="result-follows">
+                  {{ handleOnline(owner.followers) }} 已关注
+                  </div>
                 </div>
               </div>
             </el-card>
@@ -106,20 +111,20 @@ export default {
     },
     toSearch(){
       if(this.keyWord.trim()!=''){
-        if (this.userInfo.uid == undefined) {
-          this.$message({
-            message: '搜索功能需登录使用',
-            type: 'warning'
-          });
-          return;
-        }
+        // if (this.userInfo.uid == undefined) {
+        //   this.$message({
+        //     message: '搜索功能需登录使用',
+        //     type: 'warning'
+        //   });
+        //   return;
+        // }
         this.$router.push({ name: 'search', query:{ keyWord : this.keyWord } })
         this.resultList = []
         this.loading = true
         getSearch(this.value, this.keyWord, this.userInfo.uid)
             .then(response => {
               if (response.data.code == 200) {
-                this.resultList = response.data.data
+                this.resultList = response.data.data.sort((ownera, ownerb) => ownerb.isLive - ownera.isLive)
               } else {
                 this.$message({
                   message: '请求过多',
@@ -174,10 +179,9 @@ export default {
   background: #8e8e8e;
 }
 .search-bar{
-  position: absolute;
-  top: 20px;
   width: 100%;
-  height: 50px;
+  padding: 20px;
+  height: auto;
   overflow: hidden;
 }
 .search-bar-select{
@@ -192,10 +196,7 @@ export default {
   margin-left: 10px;
 }
 .search-result{
-  position: absolute;
-  top: 70px;
   width: 100%;
-  bottom: 0px;
 }
 .result-ul{
   position: absolute;
@@ -228,22 +229,37 @@ export default {
   transform: translateX(0px);
 }
 .search-result-list{
-  position: absolute;
   width: 100%;
-  bottom: 0px;
-  top: 38px;
+  top: 10px;
+  bottom: 10px;
+}
+.search-result-row {
+  width: 100%;
+  padding: 20px;
 }
 .search-result-col{
-  width: 29%;
+  width: 390px;
+  height: 130px;
   margin-bottom: 20px;
-  margin-left:50px;
+  margin-left: 20px;
 }
-.search-result-card-head{
-  position: absolute;
+.search-result-card-left{
+  width: 90px;
+  height: 90px;
+  display: inline-block;
+  vertical-align: top;
+}
+.search-result-card-right{
+  width: 220px;
+  height: 90px;
+  padding-left: 10px;
+  display: inline-block;
+  vertical-align: top;
+}
+.search-result-card-avatar{
   top: 10px;
   left: 10px;
-  height: 70px;
-  width: 70px;
+  bottom: 10px;
 }
 .search-head-pic{
   width: 100%;
@@ -251,58 +267,65 @@ export default {
   border-radius: 10px;
 }
 .search-result-card{
-  height: 90px;
-  width: 90%;
-  position: relative;
+  height: auto;
+  width: 100%;
   transition: all 0.2s;
 }
 .search-result-card:hover{
   cursor: pointer;
   transform: scale(1.1);
 }
-.search-result-card-right{
-  position: absolute;
-  top: 10px;
-  left: 100px;
-  font-weight: bold;
-}
 .info-isLive{
   margin-top: 6px;
   margin-right: 5px;
-  float: left;
+  padding: 1px 4px 4px 4px;
   height: 18px;
-  width: 45px;
+  width: auto;
   background-color: #c10f0f;
   border-radius: 2px;
-  font-size: 5px;
+  font-size: 13px;
   font-weight: 600;
   text-align: center;
   color: #F3F6F8;
+  display: inline-block;
+  vertical-align: center;
 }
 .info-notLive{
   margin-top: 6px;
   margin-right: 5px;
-  float: left;
+  padding: 1px 4px 4px 4px;
   height: 18px;
-  width: 45px;
+  width: auto;
   background-color: #979797;
   border-radius: 2px;
-  font-size: 5px;
+  font-size: 13px;
   font-weight: 600;
   text-align: center;
   color: #F3F6F8;
+  display: inline-block;
+  vertical-align: center;
 }
 .result-follows{
-  position: absolute;
-  top: 50px;
-  width: 200px;
+  margin-top: 6px;
+  margin-left: 5px;
+  width: auto;
+  max-width: fit-content;
   font-weight: normal;
   font-size: 13px;
+  display: inline-block;
+  vertical-align: center;
 }
 .result-name{
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
-  width: 210px;
+  width: auto;
+}
+.result-room-name{
+  margin-bottom: 6px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: auto;
 }
 </style>

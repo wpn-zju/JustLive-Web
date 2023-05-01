@@ -168,35 +168,23 @@ export default {
 .platform-room-container{
   height: 100%;
   width: 100%;
-  position: relative;
 }
 .platform-room-name{
-  position: absolute;
-  left: 10px;
   font-weight: bold;
   font-size: 40px;
 }
 .platform-room-list{
-  position: absolute;
-  bottom: 0;
-  left: 10px;
-  top: 78px;
-  width: 100%;
 }
 .area-types{
-  position: absolute;
-  display: inline-block;
-  left: 15px;
-  top: 59px;
-  right: 0px;
-  height: 25px;
+  margin-top: 20px;
+  width: 100%;
 }
 .area-type-name{
+  margin-right: 20px;
   font-weight: bold;
   cursor: pointer;
-  float: left;
-  margin-right: 20px;
   text-align: center;
+  display: inline-block;
 }
 .area-dropdown-link{
   color: #000000;

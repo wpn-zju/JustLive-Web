@@ -5,9 +5,9 @@
         <div class="pic-div douyu-pic-div">
           <img class="douyu-pic" src="https://imgsrc.baidu.com/forum/pic/item/297a0bfc1e178a823f26bdc2e103738da977e81c.jpg">
         </div>
-        <div class="platform-info">
+        <!-- <div class="platform-info">
           <div class="platform-info-title">斗鱼直播</div>
-        </div>
+        </div> -->
       </el-col>
     </router-link>
     <router-link :to="{name: 'platformRoom', params: {platform: 'bilibili'}}">
@@ -15,9 +15,9 @@
         <div class="pic-div bilibili-pic-div">
           <img class="bilibili-pic" src="../../../pic/bilibili-logo.png" height="50" width="120">
         </div>
-        <div class="platform-info">
+        <!-- <div class="platform-info">
           <div class="platform-info-title">哔哩哔哩直播</div>
-        </div>
+        </div> -->
       </el-col>
     </router-link>
     <router-link :to="{name: 'platformRoom', params: {platform: 'huya'}}">
@@ -25,9 +25,9 @@
         <div class="pic-div huya-pic-div">
           <img class="huya-pic" src="https://imgsrc.baidu.com/forum/pic/item/902397dda144ad3469d79d09dea20cf430ad85d7.jpg">
         </div>
-        <div class="platform-info">
+        <!-- <div class="platform-info">
           <div class="platform-info-title">虎牙直播</div>
-        </div>
+        </div> -->
       </el-col>
     </router-link>
 <!--    <router-link :to="{name: 'platformRoom', params: {platform: 'egame'}}">-->
@@ -45,9 +45,9 @@
         <div class="pic-div cc-pic-div">
           <img class="cc-pic" src="https://imgsrc.baidu.com/forum/pic/item/0ff41bd5ad6eddc48041796937dbb6fd536633fa.jpg">
         </div>
-        <div class="platform-info">
+        <!-- <div class="platform-info">
           <div class="platform-info-title">网易CC</div>
-        </div>
+        </div> -->
       </el-col>
     </router-link>
   </el-row>
@@ -68,11 +68,11 @@ export default {
   width: 100%;
 }
 .platform-col{
-  position: relative;
   margin-left: 30px;
   background-color: #d2d2d2;
   margin-bottom: 30px;
   height: 300px;
+  width: auto;
   border-radius: 10px;
   transition: all 0.2s;
 }

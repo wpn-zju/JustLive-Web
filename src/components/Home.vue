@@ -225,7 +225,7 @@ export default {
   /*margin-left: 20px;*/
   /*float: left;*/
 }
-/deep/ .el-input__inner{
+.el-input__inner{
   height: 40px;
   border-radius: 20px;    /*输入框圆角值*/
 }

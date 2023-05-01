@@ -10,7 +10,7 @@
    </div>
    <el-row class="areas-list">
      <transition-group name="areapic" :gutter="20">
-       <el-col :xs="10" :sm="8" :md="6" :lg="4" :xl="4" v-for="(areaInfo, index) in areaInfoList" :key="index" class="areas-list-col">
+       <el-col :xs="12" :sm="8" :md="6" :lg="4" :xl="3" v-for="(areaInfo, index) in areaInfoList" :key="index" class="areas-list-col">
          <div @click="toAreaList(areaInfo.typeName, areaInfo.areaName)" class="areas-list-card">
            <el-image :fit="fit"
                      class="areas-pic"
@@ -114,38 +114,27 @@ export default {
 
 <style scoped>
 .areas-container{
-  position: relative;
   height: 100%;
   width: 100%;
 }
 .areas-big-word{
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   font-weight: bold;
   font-size: 40px;
 }
 .areas-menu{
-  position: absolute;
-  top: 60px;
-  height: 25px;
-  right: 0;
-  left: 10px;
+  margin-top: 20px;
+  width: 100%;
 }
 .areas-list{
-  position: absolute;
-  top: 105px;
-  left: 0;
-  right: 0;
+  margin-top: 20px;
 }
 .areas-menu-typeName{
+  margin-right: 20px;
   font-weight: bold;
   cursor: pointer;
-  float: left;
-  margin-right: 20px;
   text-align: center;
   transition: all 0.2s;
+  display: inline-block;
 }
 .areas-menu-typeName:hover {
   transform: scale(1.2);
@@ -172,7 +161,6 @@ export default {
   /*float: left;*/
 }
 .areas-list-under-card{
-  position: absolute;
   bottom: -35px;
   width: 180px;
   height: 30px;

@@ -699,9 +699,10 @@ export default {
 .info-isLive{
   margin-top: 6px;
   margin-right: 5px;
+  padding: 1px 4px 4px 4px;
   float: left;
   height: 18px;
-  width: 45px;
+  width: auto;
   background-color: #c10f0f;
   border-radius: 10px;
   font-size: 5px;
@@ -712,9 +713,10 @@ export default {
 .info-notLive{
   margin-top: 6px;
   margin-right: 5px;
+  padding: 1px 4px 4px 4px;
   float: left;
   height: 18px;
-  width: 45px;
+  width: auto;
   background-color: #979797;
   border-radius: 10px;
   font-size: 5px;

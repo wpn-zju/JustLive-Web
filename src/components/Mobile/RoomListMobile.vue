@@ -171,7 +171,6 @@ export default {
 }
 .el-card /deep/ .el-card__body{
   padding: 0px;
-  height: 100%;
 }
 .recommend-room-pic-notLive{
   height: 100%;

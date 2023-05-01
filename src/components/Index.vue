@@ -11,6 +11,12 @@
               @keydown.enter.native="submitKw()">
           </el-input>
           <el-button class="search-btn" icon="el-icon-search" circle @click="submitKw()" size="small"></el-button>
+          <el-switch
+            class="blank-switch"
+            v-model="blankValue"
+            inactive-text="新标签模式"
+            @change="blankChange">
+          </el-switch>
         </div>
         <div class="top-follow">
           <el-dropdown v-if="isLogin == 'true'" trigger="click" placement="bottom-end" @visible-change = "refreshRoomList()">
@@ -265,6 +271,7 @@ export default {
       formPassword:{},
       loading: false,
       updateInfo: false,
+      blankValue: false,
       formPasswordRules: {
         oldPassword: [
           { required: true, message: '请输入旧密码', trigger: 'blur' },
@@ -361,11 +368,16 @@ export default {
       this.$router.push('/index/home/recommend')
     },
     submitKw(){
-      if(this.searchInput.trim()!=''){
-        let searchInput = this.searchInput
-        this.showSearch = false
-        this.searchInput = ''
-        this.$router.push({ name: 'search', query:{ keyWord : searchInput } })
+      if (this.searchInput.trim() != ''){
+        let searchInput = this.searchInput;
+        if (localStorage.getItem('blankValue') == 'true') {
+          let url = this.$router.resolve({ path: '/index/search', query:{ keyWord : searchInput } });
+          window.open(url.href, '_blank');
+        } else {
+          this.showSearch = false
+          this.searchInput = ''
+          this.$router.push({ name: 'search', query:{ keyWord : searchInput } })
+        }
       }
     },
     refreshRoomList(){
@@ -524,7 +536,6 @@ export default {
           return false
         }
       })
-
     },
     handleCommand(command) {
       if(command == 'logOut'){
@@ -541,6 +552,9 @@ export default {
         this.$refs.bindMail.$emit('openDialogBind')
       }
     },
+    blankChange(value){
+      localStorage.setItem('blankValue', value)
+    },
   },
   created() {
     if (localStorage.getItem("mixLiveUpdate") != this.mixLiveUpdate) {
@@ -552,6 +566,9 @@ export default {
     }
     if (localStorage.getItem('isLogin')) {
       this.isLogin = localStorage.getItem('isLogin')
+    }
+    if (localStorage.getItem('blankValue')) {
+      this.blankValue = localStorage.getItem('blankValue') == 'true'
     }
     if (!localStorage.getItem('localBanInfo')) {
       let banObj = {
@@ -582,8 +599,12 @@ export default {
 }
 .head-search{
   width: 250px;
-  margin-left: 40%;
+  margin-left: 30%;
   margin-top: 9px;
+}
+.blank-switch{
+  width: 150px;
+  margin-left: 10%;
 }
 .home-head-search-bar{
   position: relative;

@@ -98,13 +98,13 @@ export default {
     },
     toSearch(){
       if(this.keyWord.trim()!=''){
-        if (this.userInfo.uid == undefined) {
-          this.$message({
-            message: '搜索功能需登录使用',
-            type: 'warning'
-          });
-          return;
-        }
+        // if (this.userInfo.uid == undefined) {
+        //   this.$message({
+        //     message: '搜索功能需登录使用',
+        //     type: 'warning'
+        //   });
+        //   return;
+        // }
         this.$router.push({ name: 'searchMobile', query:{ keyWord : this.keyWord } })
         this.resultList = []
         this.loading = true

@@ -1,13 +1,6 @@
 <template>
   <el-row id="recommend-room-row" :gutter="20" class="recommend-room-row">
-    <el-switch
-        class="blank-switch"
-        v-model="blankValue"
-        inactive-text="新标签打开直播间"
-        @change="blankChange">
-    </el-switch>
-
-    <el-col class="recommend-room-col" :xs="20" :sm="10" :md="8" :lg="6" :xl="6" v-for="(room, index) in roomList" :key="index">
+    <el-col class="recommend-room-col" :xs="20" :sm="10" :md="8" :lg="6" :xl="4" v-for="(room, index) in roomList" :key="index">
         <router-link :to="{path:'/index/liveRoom',query:{ platform : room.platForm, roomId : room.roomId }}" :target="openBlank()">
           <el-card  shadow="hover" class="recommend-room-card">
             <div class="recommend-room-pic">
@@ -49,7 +42,6 @@ export default {
   props: ['roomList'],
   data() {
     return {
-      blankValue: true,
       loading: false,
       fit: "cover",
       colNum: 6,
@@ -93,18 +85,15 @@ export default {
       }
     },
     openBlank(){
-      if (this.blankValue) {
+      if (localStorage.getItem('blankValue') == 'true') {
         return "_blank"
       } else {
         return "_self"
       }
-    },
-    blankChange(value){
-      localStorage.setItem("blankValue", value)
     }
   },
   mounted() {
-    this.blankValue = localStorage.getItem("blankValue") == "true"
+    // this.blankValue = localStorage.getItem("blankValue") == "true"
     // window.onresize = function(){
     //   let _this = this;
     //   let width = document.getElementById("recommend-room-row").offsetWidth;
@@ -195,7 +184,6 @@ export default {
 }
 .el-card /deep/ .el-card__body{
   padding: 0px;
-  height: 100%;
 }
 .recommend-room-pic-notLive{
   height: 100%;
@@ -247,11 +235,6 @@ export default {
   font-size: small;
   float: left;
   margin-left: 10px;
-}
-.blank-switch{
-  position: absolute;
-  top: 0px;
-  right: 5%;
 }
 .card-enter{
   margin-top: 100px;
